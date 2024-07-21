@@ -26,7 +26,7 @@ CREATE TABLE Customer (
     LastName VARCHAR(10),
     Age INT,
     BirthDate DATE,
-    RegistrationDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    RegistrationDate DATE DEFAULT (CURDATE()),
     CityID INT,
     NeighborhoodID INT,
     FOREIGN KEY (CityID) REFERENCES City(CityID),

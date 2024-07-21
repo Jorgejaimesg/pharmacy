@@ -4,9 +4,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
-
 
 import java.awt.Color;
 import java.awt.Font;
@@ -78,9 +75,12 @@ public class CustomerUI extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == findButton){
-            String CustomerID = JOptionPane.showInputDialog(this, "Insert the customer ID:", "Insert", JOptionPane.QUESTION_MESSAGE);
             this.setVisible(false);
-            System.out.print(CustomerID);
+            FindUI findUI = new FindUI();
+            findUI.setBounds(0, 0, 500, 600);
+            findUI.setVisible(true);
+            findUI.setResizable(false);
+            findUI.setLocationRelativeTo(null);
         } 
         
         if(e.getSource() == addButton){

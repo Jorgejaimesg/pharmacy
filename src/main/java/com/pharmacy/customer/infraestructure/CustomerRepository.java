@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Properties;
 
 import com.pharmacy.customer.domain.entity.Customer;
@@ -82,33 +83,30 @@ public class CustomerRepository implements CustomerService {
     }
 
     @Override
-    public Customer findCustomerById(String CustomerID) {
-        String query = "SELECT CustomerID, TypeID, Name, LastName, Age, BirthDate, RegistrationDate, CityID, NeighborhoodID FROM Customer WHERE id = ?";
+    public Optional<Customer> findCustomerById(String ID) {
+        String query = "SELECT ID, TypeID, Name, LastName, Age, BirthDate, RegistrationDate, CityID, NeighborhoodID FROM Customer WHERE ID = ?";
         try {
             PreparedStatement ps = connection.prepareStatement(query);
-            ps.setString(1, CustomerID);
-            try (ResultSet rs = ps.executeQuery()){
-                if(rs.next()){
-                    Customer customer = new Customer(
-                        rs.getString("CustomerID"), 
-                        rs.getInt("TypeID"), 
-                        rs.getString("Name"),  
-                        rs.getString("LastName"), 
-                        rs.getInt("Age"), 
-                        rs.getString("BirthDate"), 
-                        rs.getString("RegistrationDate"), 
-                        rs.getInt("CityID"),
-                        rs.getInt("NeighborhoodID")
-                        );
-                        return customer;
+            ps.setString(1, ID);
+            try (ResultSet rs = ps.executeQuery()) {
+                    if (rs.next()) {
+                        Customer customer = new Customer(rs.getString("ID"), 
+                                        rs.getInt("TypeID"), 
+                                        rs.getString("Name"),  
+                                        rs.getString("LastName"), 
+                                        rs.getInt("Age"), 
+                                        rs.getString("BirthDate"), 
+                                        rs.getString("RegistrationDate"), 
+                                        rs.getInt("CityID"),
+                                        rs.getInt("NeighborhoodID")
+                                        );
+                        return Optional.of(customer);
+                    }
                 }
-            } 
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        return null;
-        
+        return Optional.empty();
     }
 
     @Override
