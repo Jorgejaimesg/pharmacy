@@ -13,9 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-import com.pharmacy.city.aplication.CreateCityUseCase;
 import com.pharmacy.city.aplication.DeleteCityUseCase;
-import com.pharmacy.city.domain.entity.City;
 import com.pharmacy.city.domain.service.CityService;
 import com.pharmacy.city.infraestructure.CityRepository;
 

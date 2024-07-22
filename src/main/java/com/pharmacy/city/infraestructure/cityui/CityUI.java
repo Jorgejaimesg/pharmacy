@@ -11,12 +11,10 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import com.pharmacy.city.domain.entity.City;
-import com.pharmacy.customer.infraestructure.customerui.DeleteUI;
 
 public class CityUI extends JFrame implements ActionListener{
     private JLabel title, logoImg;
-    private JButton findButton, addButton, updateButton, deleteButton, allCustomerButton;
+    private JButton addButton, updateButton, deleteButton, allCustomerButton;
 
     public CityUI(){
         setLayout(null);

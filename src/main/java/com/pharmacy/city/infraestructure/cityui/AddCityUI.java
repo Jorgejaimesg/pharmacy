@@ -17,7 +17,7 @@ import com.pharmacy.city.aplication.CreateCityUseCase;
 import com.pharmacy.city.domain.entity.City;
 import com.pharmacy.city.domain.service.CityService;
 import com.pharmacy.city.infraestructure.CityRepository;
-import com.pharmacy.customer.infraestructure.customerui.CustomerUI;
+
 
 public class AddCityUI extends JFrame implements ActionListener {
     
