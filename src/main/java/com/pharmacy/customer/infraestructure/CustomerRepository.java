@@ -51,7 +51,7 @@ public class CustomerRepository implements CustomerService {
 
     @Override
     public void updateCustomer(Customer customer) {
-        String query = "UPDATE customer SET TypeID = ?, Name = ?, LastName = ?, Age = ?, BirthDate = ?, RegistrationDate = ?, CityID = ?, NeighborhoodID = ? WHERE CustomerID = ?";
+        String query = "UPDATE customer SET TypeID = ?, Name = ?, LastName = ?, Age = ?, BirthDate = ?, RegistrationDate = ?, CityID = ?, NeighborhoodID = ? WHERE ID = ?";
         try {
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setInt(1, customer.getTypeID());
@@ -70,11 +70,11 @@ public class CustomerRepository implements CustomerService {
     }
 
     @Override
-    public Customer deleteCustomer(String customerId) {
-        String query = "DELETE FROM customer WHERE CustomerID = ?";
+    public Customer deleteCustomer(String ID) {
+        String query = "DELETE FROM customer WHERE ID = ?";
         try {
             PreparedStatement ps = connection.prepareStatement(query);
-            ps.setString(1, customerId);
+            ps.setString(1, ID);
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -90,7 +90,8 @@ public class CustomerRepository implements CustomerService {
             ps.setString(1, ID);
             try (ResultSet rs = ps.executeQuery()) {
                     if (rs.next()) {
-                        Customer customer = new Customer(rs.getString("ID"), 
+                        Customer customer = new Customer(
+                                        rs.getString("ID"), 
                                         rs.getInt("TypeID"), 
                                         rs.getString("Name"),  
                                         rs.getString("LastName"), 

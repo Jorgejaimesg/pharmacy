@@ -22,7 +22,7 @@ CREATE TABLE TypeID (
 CREATE TABLE Customer (
     ID VARCHAR(20) PRIMARY KEY,
     TypeID INT,
-    Name VARCHAR(10),
+    Name VARCHAR(30),
     LastName VARCHAR(10),
     Age INT,
     BirthDate DATE,

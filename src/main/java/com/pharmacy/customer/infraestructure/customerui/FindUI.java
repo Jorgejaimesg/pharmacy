@@ -182,8 +182,7 @@ public class FindUI extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==FindButton){
-            
-            String customerID = ID.getText();
+            String customerID = ID.getText().trim();
             CustomerService customerService = new CustomerRepository();
             FindCustomerUseCase findCustomerUseCase = new FindCustomerUseCase(customerService);
             Optional<Customer> customer = findCustomerUseCase.execute(customerID);

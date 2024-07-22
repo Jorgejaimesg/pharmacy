@@ -27,7 +27,7 @@ public class AddUI extends JFrame implements ActionListener {
     private JTextField txtID, txtName,txtLastName,txtAge;
     private JDateChooser birthDate;
     private JComboBox<String> comboTypeID, comboCity,comboNeighborhood;
-    private JButton addButton, backButton;
+    private JButton addButton, backButton, newButton;
 
     public AddUI() {
         setLayout(null);
@@ -161,18 +161,25 @@ public class AddUI extends JFrame implements ActionListener {
         comboNeighborhood.addItem("3");
 
         addButton = new JButton("Add");
-        addButton.setBounds(105, 470, 120, 30);
+        addButton.setBounds(55, 490, 120, 30);
         addButton.setFont(new Font("Andale Mono", Font.PLAIN, 20));
         addButton.setForeground(new Color(0, 0, 100));
         addButton.addActionListener(this);
         add(addButton);
 
         backButton = new JButton("Go Back");
-        backButton.setBounds(230, 470, 120, 30);
+        backButton.setBounds(305, 490, 120, 30);
         backButton.setFont(new Font("Andale Mono", Font.PLAIN, 20));
         backButton.setForeground(new Color(0, 0, 100));
         backButton.addActionListener(this);
         add(backButton);
+
+        newButton = new JButton("New");
+        newButton.setBounds(180, 490, 120, 30);
+        newButton.setFont(new Font("Andale Mono", Font.PLAIN, 20));
+        newButton.setForeground(new Color(0, 0, 100));
+        newButton.addActionListener(this);
+        add(newButton);
 
     }
 
@@ -216,6 +223,17 @@ public class AddUI extends JFrame implements ActionListener {
             this.setVisible(false);
             CustomerUI uiCustomer = new CustomerUI();
             uiCustomer.startCustomer();
+        }
+
+        if (e.getSource()==newButton){
+            txtID.setText("");
+                comboTypeID.setSelectedItem("");
+                txtName.setText("");
+                txtLastName.setText("");
+                txtAge.setText("");
+                birthDate.setDate(null);
+                comboCity.setSelectedItem("");
+                comboNeighborhood.setSelectedItem("");
         }
     }
 

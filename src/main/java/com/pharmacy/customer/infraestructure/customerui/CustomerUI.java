@@ -93,5 +93,23 @@ public class CustomerUI extends JFrame implements ActionListener {
             this.setVisible(false);
 
         }
+
+        if(e.getSource()== deleteButton){
+            DeleteUI deleteUI = new DeleteUI();
+            deleteUI.setBounds(0, 0, 500, 300);
+            deleteUI.setVisible(true);
+            deleteUI.setResizable(false);
+            deleteUI.setLocationRelativeTo(null);
+            this.setVisible(false);
+        }
+
+        if (e.getSource() == updateButton){
+            UpdateUI UpdateUI = new UpdateUI();
+            UpdateUI.setBounds(0, 0, 500, 600);
+            UpdateUI.setVisible(true);
+            UpdateUI.setResizable(false);
+            UpdateUI.setLocationRelativeTo(null);
+            this.setVisible(false);
+        }
     }
 }
