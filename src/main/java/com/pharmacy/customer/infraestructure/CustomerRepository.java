@@ -113,13 +113,13 @@ public class CustomerRepository implements CustomerService {
     @Override
     public List<Customer> findAllCustomer() {
         List<Customer> customers = new ArrayList<>();
-        String query = "SELECT CustomerID, TypeID, Name, LastName, Age, BirthDate, RegistrationDate, CityID, NeighborhoodID FROM customer";
+        String query = "SELECT ID, TypeID, Name, LastName, Age, BirthDate, RegistrationDate, CityID, NeighborhoodID FROM customer";
         try {
             PreparedStatement ps = connection.prepareStatement(query);
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
                     Customer customer = new Customer(
-                        rs.getString("CustomerID"), 
+                        rs.getString("ID"), 
                         rs.getInt("TypeID"), 
                         rs.getString("Name"),  
                         rs.getString("LastName"), 

@@ -19,6 +19,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import com.toedter.calendar.JDateChooser;
 
@@ -204,7 +205,7 @@ public class AddUI extends JFrame implements ActionListener {
                 CustomerService customerService = new CustomerRepository();
                 CreateCustomerUseCase createCustomerUseCase = new CreateCustomerUseCase(customerService);
                 createCustomerUseCase.execute(newCustomer);
-
+                JOptionPane.showMessageDialog(this, "Customer added successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
                 //Limpiar las casillas
                 txtID.setText("");
                 comboTypeID.setSelectedItem("");

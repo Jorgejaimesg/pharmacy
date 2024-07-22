@@ -29,7 +29,7 @@ public class DeleteUI extends JFrame implements ActionListener {
     public DeleteUI(){
         setLayout(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setTitle("Add Customers");
+        setTitle("Delete Customers");
         getContentPane().setBackground(new Color(200, 200, 200));
         setIconImage(new ImageIcon(getClass().getClassLoader().getResource("images/icon.png")).getImage());
 
@@ -41,9 +41,9 @@ public class DeleteUI extends JFrame implements ActionListener {
         logoImg.setBounds(20, 20, 70, 70);
         add(logoImg);
 
-        title = new JLabel("Find Customers");
+        title = new JLabel("Delete Customers");
         title.setBounds(140, 20, 400, 70);
-        title.setFont(new Font("Andale Mono", Font.BOLD, 40));
+        title.setFont(new Font("Andale Mono", Font.BOLD, 35));
         title.setForeground(new Color(0, 0, 100));
         add(title);
 

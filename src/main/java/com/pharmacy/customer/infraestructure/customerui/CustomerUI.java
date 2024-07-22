@@ -4,16 +4,26 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
+import com.pharmacy.customer.aplication.FindAllCustomersUseCase;
+import com.pharmacy.customer.domain.entity.Customer;
+import com.pharmacy.customer.domain.service.CustomerService;
+import com.pharmacy.customer.infraestructure.CustomerRepository;
 
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 public class CustomerUI extends JFrame implements ActionListener {
     private JLabel title, logoImg;
-    private JButton findButton, addButton, updateButton, deleteButton;
+    private JButton findButton, addButton, updateButton, deleteButton, allCustomerButton;
 
     public CustomerUI() { 
         setLayout(null);
@@ -37,32 +47,39 @@ public class CustomerUI extends JFrame implements ActionListener {
         add(title);
 
         findButton = new JButton("Find");
-        findButton.setBounds(520, 250, 150, 60);
+        findButton.setBounds(520, 225, 150, 60);
         findButton.setFont(new Font("Andale Mono", Font.PLAIN, 25));
         findButton.setForeground(new Color(0, 0, 100));
         findButton.addActionListener(this);
         add(findButton);
         
         addButton = new JButton("Add");
-        addButton.setBounds(700, 250, 150, 60);
+        addButton.setBounds(700, 225, 150, 60);
         addButton.setFont(new Font("Andale Mono", Font.PLAIN, 25));
         addButton.setForeground(new Color(0, 0, 100));
         addButton.addActionListener(this);
         add(addButton);
 
         updateButton = new JButton("Update");
-        updateButton.setBounds(520, 330, 150, 60);
+        updateButton.setBounds(520, 305, 150, 60);
         updateButton.setFont(new Font("Andale Mono", Font.PLAIN, 25));
         updateButton.setForeground(new Color(0, 0, 100));
         updateButton.addActionListener(this);
         add(updateButton);
 
         deleteButton = new JButton("Delete");
-        deleteButton.setBounds(700, 330, 150, 60);
+        deleteButton.setBounds(700, 305, 150, 60);
         deleteButton.setFont(new Font("Andale Mono", Font.PLAIN, 25));
         deleteButton.setForeground(new Color(0, 0, 100));
         deleteButton.addActionListener(this);
         add(deleteButton);
+
+        allCustomerButton = new JButton("All customers");
+        allCustomerButton.setBounds(520, 385, 330, 60);
+        allCustomerButton.setFont(new Font("Andale Mono", Font.PLAIN, 25));
+        allCustomerButton.setForeground(new Color(0, 0, 100));
+        allCustomerButton.addActionListener(this);
+        add(allCustomerButton);
     }
     public void startCustomer() {
         CustomerUI customerUI = new CustomerUI();
@@ -110,6 +127,26 @@ public class CustomerUI extends JFrame implements ActionListener {
             UpdateUI.setResizable(false);
             UpdateUI.setLocationRelativeTo(null);
             this.setVisible(false);
+        }
+
+        if(e.getSource()==allCustomerButton){
+    
+        CustomerService customerService = new CustomerRepository();
+        FindAllCustomersUseCase findAllCustomersUseCase = new FindAllCustomersUseCase(customerService);
+        List<Customer> customers = findAllCustomersUseCase.findAllCustomer();
+        
+        String[] columns = {"ID", "Name", "LastName","City"};
+        DefaultTableModel defaultTableModel = new DefaultTableModel(columns, 0);
+
+        customers.forEach(customer -> {
+            Object[] row = {customer.getId(), customer.getName(), customer.getLastName(), customer.getCityId()};
+            defaultTableModel.addRow(row);
+        });
+
+        JTable table = new JTable(defaultTableModel);
+        JScrollPane scrollPane = new JScrollPane(table);
+
+        JOptionPane.showMessageDialog(null, scrollPane, "Customer List", JOptionPane.PLAIN_MESSAGE);
         }
     }
 }

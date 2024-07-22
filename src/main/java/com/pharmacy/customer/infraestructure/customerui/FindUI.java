@@ -30,7 +30,7 @@ public class FindUI extends JFrame implements ActionListener {
     public FindUI() {
         setLayout(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setTitle("Add Customers");
+        setTitle("Find Customers");
         getContentPane().setBackground(new Color(200, 200, 200));
         setIconImage(new ImageIcon(getClass().getClassLoader().getResource("images/icon.png")).getImage());
 

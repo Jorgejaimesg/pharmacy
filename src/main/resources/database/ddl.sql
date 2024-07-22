@@ -1,21 +1,21 @@
-CREATE DATABASE phaymacy;
+CREATE DATABASE pharmacy;
 
-USE phaymacy;
+USE pharmacy;
 
 CREATE TABLE City (
-    CityID INT PRIMARY KEY,
-    CityName VARCHAR(50)
+    ID INT PRIMARY KEY AUTO_INCREMENT,
+    Name VARCHAR(50)
 );
 
 CREATE TABLE Neighborhood (
-    NeighborhoodID INT PRIMARY KEY,
-    NeighborhoodName VARCHAR(50),
+    ID INT PRIMARY KEY AUTO_INCREMENT,
+    Name VARCHAR(50),
     CityID INT,
-    FOREIGN KEY (CityID) REFERENCES City(CityID)
+    FOREIGN KEY (CityID) REFERENCES City(ID)
 );
 
 CREATE TABLE TypeID (
-    TypeID INT PRIMARY KEY,
+    ID INT PRIMARY KEY AUTO_INCREMENT,
     TypeName VARCHAR(50)
 );
 
@@ -29,7 +29,7 @@ CREATE TABLE Customer (
     RegistrationDate DATE DEFAULT (CURDATE()),
     CityID INT,
     NeighborhoodID INT,
-    FOREIGN KEY (CityID) REFERENCES City(CityID),
-    FOREIGN KEY (NeighborhoodID) REFERENCES Neighborhood(NeighborhoodID),
-    FOREIGN KEY (TypeID) REFERENCES TypeID(TypeID)
+    FOREIGN KEY (CityID) REFERENCES City(ID),
+    FOREIGN KEY (NeighborhoodID) REFERENCES Neighborhood(ID),
+    FOREIGN KEY (TypeID) REFERENCES TypeID(ID)
 );
