@@ -31,8 +31,24 @@ public class MainUI extends JFrame implements ActionListener{
         Image imagenRedimensionada = imagenOriginal.getImage().getScaledInstance(300, 300, Image.SCALE_SMOOTH);
         ImageIcon imagen = new ImageIcon(imagenRedimensionada);
 
+        ImageIcon imagenOriginalCustomer = new ImageIcon(getClass().getClassLoader().getResource("images/CustomerImg.png"));
+        Image imagenRedimensionadaCustomer = imagenOriginalCustomer.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH);
+        ImageIcon imagenCustomer = new ImageIcon(imagenRedimensionadaCustomer);
+
+        ImageIcon imagenOriginalCity = new ImageIcon(getClass().getClassLoader().getResource("images/CityImg.png"));
+        Image imagenRedimensionadaCity = imagenOriginalCity.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH);
+        ImageIcon imagenCity = new ImageIcon(imagenRedimensionadaCity);
+
+        ImageIcon imagenOriginalNeighborhood = new ImageIcon(getClass().getClassLoader().getResource("images/neighborhood.png"));
+        Image imagenRedimensionadaNeighborhood = imagenOriginalNeighborhood.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH);
+        ImageIcon imagenNeighborhood = new ImageIcon(imagenRedimensionadaNeighborhood);
+
+        ImageIcon imagenOriginalTypeId = new ImageIcon(getClass().getClassLoader().getResource("images/type.png"));
+        Image imagenRedimensionadaTypeId = imagenOriginalTypeId.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH);
+        ImageIcon imagenTypeId = new ImageIcon(imagenRedimensionadaTypeId);
+
         logoImg = new JLabel(imagen);
-        logoImg.setBounds(10, 40, 500, 500);
+        logoImg.setBounds(-60, 75, 500, 500);
         add(logoImg);
 
         title = new JLabel("George's Pharmacy");
@@ -41,30 +57,38 @@ public class MainUI extends JFrame implements ActionListener{
         title.setForeground(new Color(0, 0, 100));
         add(title);
 
-        customer = new JButton("Customer");
-        customer.setBounds(520, 225, 180, 60);
-        customer.setFont(new Font("Andale Mono", Font.PLAIN, 25));
+        customer = new JButton("Customer",imagenCustomer);
+        customer.setBounds(380, 200, 120, 120);
+        customer.setFont(new Font("Andale Mono", Font.PLAIN, 18));
+        customer.setHorizontalTextPosition(JButton.CENTER);
+        customer.setVerticalTextPosition(JButton.BOTTOM);
         customer.setForeground(new Color(0, 0, 100));
         customer.addActionListener(this);
         add(customer);
         
-        city = new JButton("City");
-        city.setBounds(730, 225, 180, 60);
-        city.setFont(new Font("Andale Mono", Font.PLAIN, 25));
+        city = new JButton("City", imagenCity);
+        city.setBounds(520, 200, 120, 120);
+        city.setFont(new Font("Andale Mono", Font.PLAIN, 18));
+        city.setHorizontalTextPosition(JButton.CENTER);
+        city.setVerticalTextPosition(JButton.BOTTOM);
         city.setForeground(new Color(0, 0, 100));
         city.addActionListener(this);
         add(city);
 
-        neighborhood = new JButton("Neighborhood");
-        neighborhood.setBounds(520, 305, 180, 60);
-        neighborhood.setFont(new Font("Andale Mono", Font.PLAIN, 25));
+        neighborhood = new JButton("Neighborhood",imagenNeighborhood);
+        neighborhood.setBounds(660, 200, 120, 120);
+        neighborhood.setFont(new Font("Andale Mono", Font.PLAIN, 18));
+        neighborhood.setHorizontalTextPosition(JButton.CENTER);
+        neighborhood.setVerticalTextPosition(JButton.BOTTOM);
         neighborhood.setForeground(new Color(0, 0, 100));
         neighborhood.addActionListener(this);
         add(neighborhood);
 
-        typeID = new JButton("Type ID");
-        typeID.setBounds(730, 305, 180, 60);
-        typeID.setFont(new Font("Andale Mono", Font.PLAIN, 25));
+        typeID = new JButton("ID types",imagenTypeId);
+        typeID.setBounds(790, 200, 120, 120);
+        typeID.setFont(new Font("Andale Mono", Font.PLAIN, 18));
+        typeID.setHorizontalTextPosition(JButton.CENTER);
+        typeID.setVerticalTextPosition(JButton.BOTTOM);
         typeID.setForeground(new Color(0, 0, 100));
         typeID.addActionListener(this);
         add(typeID);
