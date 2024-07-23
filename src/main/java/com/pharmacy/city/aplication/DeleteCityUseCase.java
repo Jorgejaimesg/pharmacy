@@ -9,7 +9,7 @@ public class DeleteCityUseCase {
         this.cityService = cityService;
     }
 
-    public City execute(String ID) {
-        return cityService.deleteCity(ID);
+    public City execute(String Name) {
+        return cityService.deleteCity(Name);
     }
 }

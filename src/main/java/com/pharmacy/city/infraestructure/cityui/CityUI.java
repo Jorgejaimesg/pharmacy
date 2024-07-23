@@ -5,16 +5,28 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
+import com.pharmacy.city.aplication.FindAllCityUseCase;
+import com.pharmacy.city.domain.entity.City;
+import com.pharmacy.city.domain.service.CityService;
+import com.pharmacy.city.infraestructure.CityRepository;
+import com.pharmacy.main.infraestructure.MainUI;
+
 
 
 public class CityUI extends JFrame implements ActionListener{
     private JLabel title, logoImg;
-    private JButton addButton, updateButton, deleteButton, allCustomerButton;
+    private JButton addButton, deleteButton, allCityButton, backButton;
 
     public CityUI(){
         setLayout(null);
@@ -44,26 +56,26 @@ public class CityUI extends JFrame implements ActionListener{
         addButton.addActionListener(this);
         add(addButton);
 
-        updateButton = new JButton("Update");
-        updateButton.setBounds(520, 335, 150, 60);
-        updateButton.setFont(new Font("Andale Mono", Font.PLAIN, 25));
-        updateButton.setForeground(new Color(0, 0, 100));
-        updateButton.addActionListener(this);
-        add(updateButton);
+        backButton = new JButton("🔙");
+        backButton.setBounds(0, 0, 60, 30);
+        backButton.setFont(new Font("Andale Mono", Font.PLAIN, 20));
+        backButton.setForeground(new Color(0, 0, 100));
+        backButton.addActionListener(this);
+        add(backButton);
 
         deleteButton = new JButton("Delete");
-        deleteButton.setBounds(700, 335, 150, 60);
+        deleteButton.setBounds(700, 255, 150, 60);
         deleteButton.setFont(new Font("Andale Mono", Font.PLAIN, 25));
         deleteButton.setForeground(new Color(0, 0, 100));
         deleteButton.addActionListener(this);
         add(deleteButton);
 
-        allCustomerButton = new JButton("All cities");
-        allCustomerButton.setBounds(700, 255, 150, 60);
-        allCustomerButton.setFont(new Font("Andale Mono", Font.PLAIN, 25));
-        allCustomerButton.setForeground(new Color(0, 0, 100));
-        allCustomerButton.addActionListener(this);
-        add(allCustomerButton);
+        allCityButton = new JButton("All cities");
+        allCityButton.setBounds(520, 335, 330, 60);
+        allCityButton.setFont(new Font("Andale Mono", Font.PLAIN, 25));
+        allCityButton.setForeground(new Color(0, 0, 100));
+        allCityButton.addActionListener(this);
+        add(allCityButton);
     }
     public void startCity() {
         CityUI cityUI = new CityUI();
@@ -75,23 +87,42 @@ public class CityUI extends JFrame implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource()==addButton){
-            AddCityUI addUI = new AddCityUI();
-            addUI.setBounds(0, 0, 500, 300);
-            addUI.setVisible(true);
-            addUI.setResizable(false);
-            addUI.setLocationRelativeTo(null);
             this.setVisible(false);
-
+            AddCityUI addCityUI = new AddCityUI();
+            addCityUI.startAddCity();
+        }
+        
+        if(e.getSource()==deleteButton){
+            this.setVisible(false);
+            DeleteCityUI deleteCityUI = new DeleteCityUI();
+            deleteCityUI.startDeleteCity();
         }
 
-        if(e.getSource()==deleteButton){
+        if (e.getSource()==allCityButton){
+                CityService cityService = new CityRepository();
+                FindAllCityUseCase findAllCitysUseCase = new FindAllCityUseCase(cityService);
+                List<City> Cities = findAllCitysUseCase.findAllCity();
+        
+                String[] columns = {"ID", "Name"};
+                DefaultTableModel defaultTableModel = new DefaultTableModel(columns, 0);
 
-            DeleteCityUI deleteUIA = new DeleteCityUI();
-            deleteUIA.setBounds(0, 0, 500, 300);
-            deleteUIA.setVisible(true);
-            deleteUIA.setResizable(false);
-            deleteUIA.setLocationRelativeTo(null);
+                Cities.forEach(City -> {
+                    Object[] row = {City.getId(), City.getName()};
+                    defaultTableModel.addRow(row);
+                });
+
+        JTable table = new JTable(defaultTableModel);
+        JScrollPane scrollPane = new JScrollPane(table);
+
+        JOptionPane.showMessageDialog(null, scrollPane, "City List", JOptionPane.PLAIN_MESSAGE);
+        }
+
+        if(e.getSource()==backButton){
             this.setVisible(false);
+            MainUI mainUI = new MainUI();
+            mainUI.startMenu();
+        }
+
         }
     }
-}
+

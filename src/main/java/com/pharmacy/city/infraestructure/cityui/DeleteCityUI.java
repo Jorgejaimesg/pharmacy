@@ -5,28 +5,37 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 
 import com.pharmacy.city.aplication.DeleteCityUseCase;
+import com.pharmacy.city.aplication.FindAllCityUseCase;
+import com.pharmacy.city.domain.entity.City;
 import com.pharmacy.city.domain.service.CityService;
 import com.pharmacy.city.infraestructure.CityRepository;
 
 public class DeleteCityUI extends JFrame implements ActionListener{
 
-private JLabel logoImg, title, labelName;
+    
+    CityService cityService = new CityRepository();
+    DeleteCityUseCase deleteCityUseCase = new DeleteCityUseCase(cityService);
+    FindAllCityUseCase findAllCityUseCase = new FindAllCityUseCase(cityService);
+    List<City> cities = findAllCityUseCase.findAllCity();
+
+    private JLabel logoImg, title, labelName;
     private JButton deleteButton, backButton;
-    private JTextField Name;
+    private JComboBox<String> Name;
 
     public DeleteCityUI(){
         setLayout(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setTitle("Delete Customers");
+        setTitle("Delete City");
         getContentPane().setBackground(new Color(200, 200, 200));
         setIconImage(new ImageIcon(getClass().getClassLoader().getResource("images/icon.png")).getImage());
 
@@ -50,11 +59,17 @@ private JLabel logoImg, title, labelName;
         labelName.setForeground(new Color(0, 0, 100));
         add(labelName);
 
-        Name = new JTextField();
+        Name = new JComboBox<String>();
         Name.setBounds(170, 130, 255, 30);
         Name.setFont(new Font("Andale Mono", Font.PLAIN, 20));
         Name.setForeground(new Color(0, 0, 100));
         add(Name);
+        Name.addItem("");
+        for(City city : cities){
+            Name.addItem(city.getName());
+        };
+
+
 
         deleteButton = new JButton("Delete");
         deleteButton.setBounds(125, 200, 120, 30);
@@ -71,21 +86,28 @@ private JLabel logoImg, title, labelName;
         add(backButton);
     }
 
+    public void startDeleteCity() {
+        DeleteCityUI deleteUIA = new DeleteCityUI();
+        deleteUIA.setBounds(0, 0, 500, 300);
+        deleteUIA.setVisible(true);
+        deleteUIA.setResizable(false);
+        deleteUIA.setLocationRelativeTo(null);
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource()==deleteButton){
 
             try {
-                String cityName = Name.getText().trim();
+                String cityName = Name.getSelectedItem().toString();
                 if (cityName.length()>0){
                 
-                CityService cityService = new CityRepository();
-                DeleteCityUseCase deleteCityUseCase = new DeleteCityUseCase(cityService);
+                
                 deleteCityUseCase.execute(cityName);
 
 
                 JOptionPane.showMessageDialog(this, "City added successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
-                Name.setText("");
+                Name.setSelectedItem("");
                 } else {
                     JOptionPane.showMessageDialog(this, "Invalid Name.", "Error", JOptionPane.ERROR_MESSAGE);
                 }

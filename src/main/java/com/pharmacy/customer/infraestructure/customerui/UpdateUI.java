@@ -205,6 +205,14 @@ public class UpdateUI extends JFrame implements ActionListener {
         add(backButton);
 }
 
+public void startUpdateCustomer() {
+    UpdateUI UpdateUI = new UpdateUI();
+    UpdateUI.setBounds(0, 0, 500, 600);
+    UpdateUI.setVisible(true);
+    UpdateUI.setResizable(false);
+    UpdateUI.setLocationRelativeTo(null);
+
+}
 
     @Override
     public void actionPerformed(ActionEvent e) {

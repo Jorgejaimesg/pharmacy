@@ -13,6 +13,7 @@ import com.pharmacy.customer.aplication.FindAllCustomersUseCase;
 import com.pharmacy.customer.domain.entity.Customer;
 import com.pharmacy.customer.domain.service.CustomerService;
 import com.pharmacy.customer.infraestructure.CustomerRepository;
+import com.pharmacy.main.infraestructure.MainUI;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -23,7 +24,7 @@ import java.util.List;
 
 public class CustomerUI extends JFrame implements ActionListener {
     private JLabel title, logoImg;
-    private JButton findButton, addButton, updateButton, deleteButton, allCustomerButton;
+    private JButton findButton, addButton, updateButton, deleteButton, allCustomerButton, backButton;
 
     public CustomerUI() { 
         setLayout(null);
@@ -45,6 +46,13 @@ public class CustomerUI extends JFrame implements ActionListener {
         title.setFont(new Font("Andale Mono", Font.BOLD, 75));
         title.setForeground(new Color(0, 0, 100));
         add(title);
+
+        backButton = new JButton("🔙");
+        backButton.setBounds(0, 0, 60, 30);
+        backButton.setFont(new Font("Andale Mono", Font.PLAIN, 20));
+        backButton.setForeground(new Color(0, 0, 100));
+        backButton.addActionListener(this);
+        add(backButton);
 
         findButton = new JButton("Find");
         findButton.setBounds(520, 225, 150, 60);
@@ -94,40 +102,29 @@ public class CustomerUI extends JFrame implements ActionListener {
         if(e.getSource() == findButton){
             this.setVisible(false);
             FindUI findUI = new FindUI();
-            findUI.setBounds(0, 0, 500, 600);
-            findUI.setVisible(true);
-            findUI.setResizable(false);
-            findUI.setLocationRelativeTo(null);
+            findUI.startFindCustomer();
         } 
         
         if(e.getSource() == addButton){
-            
-            AddUI addui = new AddUI();
-            addui.setBounds(0, 0, 500, 580);
-            addui.setVisible(true);
-            addui.setResizable(false);
-            addui.setLocationRelativeTo(null);
             this.setVisible(false);
-
+            AddUI addUI = new AddUI();
+            addUI.startAddCustomer();
         }
-
+        
         if(e.getSource()== deleteButton){
+            
+            this.setVisible(false);
             DeleteUI deleteUI = new DeleteUI();
-            deleteUI.setBounds(0, 0, 500, 300);
-            deleteUI.setVisible(true);
-            deleteUI.setResizable(false);
-            deleteUI.setLocationRelativeTo(null);
-            this.setVisible(false);
+            deleteUI.startDeleteCustomer();
         }
-
+        
         if (e.getSource() == updateButton){
-            UpdateUI UpdateUI = new UpdateUI();
-            UpdateUI.setBounds(0, 0, 500, 600);
-            UpdateUI.setVisible(true);
-            UpdateUI.setResizable(false);
-            UpdateUI.setLocationRelativeTo(null);
+            
             this.setVisible(false);
+            UpdateUI updateUI = new UpdateUI();
+            updateUI.startUpdateCustomer();
         }
+        
 
         if(e.getSource()==allCustomerButton){
     
@@ -147,6 +144,12 @@ public class CustomerUI extends JFrame implements ActionListener {
         JScrollPane scrollPane = new JScrollPane(table);
 
         JOptionPane.showMessageDialog(null, scrollPane, "Customer List", JOptionPane.PLAIN_MESSAGE);
+        }
+
+        if(e.getSource()==backButton){
+            this.setVisible(false);
+            MainUI mainUI = new MainUI();
+            mainUI.startMenu();
         }
     }
 }

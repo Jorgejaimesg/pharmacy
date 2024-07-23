@@ -7,9 +7,9 @@ import com.pharmacy.city.domain.entity.City;
 
 public interface CityService {
         void createCity(City city);
-        void updateCity(City city);
-        City deleteCity(String id);
+        City deleteCity(String Name);
         Optional<City> findCityByName (String Name);
+        Optional<City> findCityById (int Id);
         List<City> findAllCity();
     }
     

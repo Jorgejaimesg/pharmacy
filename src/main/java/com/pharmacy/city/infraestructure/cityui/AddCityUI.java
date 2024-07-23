@@ -28,7 +28,7 @@ public class AddCityUI extends JFrame implements ActionListener {
     public AddCityUI(){
         setLayout(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setTitle("Delete Customers");
+        setTitle("Add City");
         getContentPane().setBackground(new Color(200, 200, 200));
         setIconImage(new ImageIcon(getClass().getClassLoader().getResource("images/icon.png")).getImage());
 
@@ -71,6 +71,15 @@ public class AddCityUI extends JFrame implements ActionListener {
         backButton.setForeground(new Color(0, 0, 100));
         backButton.addActionListener(this);
         add(backButton);
+    }
+
+    public void startAddCity() {
+        AddCityUI addUI = new AddCityUI();
+        addUI.setBounds(0, 0, 500, 300);
+        addUI.setVisible(true);
+        addUI.setResizable(false);
+        addUI.setLocationRelativeTo(null);
+        
     }
 
     @Override

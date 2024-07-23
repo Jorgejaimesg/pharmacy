@@ -82,6 +82,16 @@ public class DeleteUI extends JFrame implements ActionListener {
         add(backButton);
     }
 
+    public void startDeleteCustomer() {
+        DeleteUI deleteUI = new DeleteUI();
+            deleteUI.setBounds(0, 0, 500, 300);
+            deleteUI.setVisible(true);
+            deleteUI.setResizable(false);
+            deleteUI.setLocationRelativeTo(null);
+
+    }
+
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == deleteButton) {

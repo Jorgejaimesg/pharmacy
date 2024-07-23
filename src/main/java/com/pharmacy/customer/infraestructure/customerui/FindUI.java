@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import java.util.Optional;
 
 import javax.swing.ImageIcon;
@@ -15,12 +16,33 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+import com.pharmacy.city.aplication.FindCityByIdUseCase;
+import com.pharmacy.city.domain.entity.City;
+import com.pharmacy.city.domain.service.CityService;
+import com.pharmacy.city.infraestructure.CityRepository;
 import com.pharmacy.customer.aplication.FindCustomerUseCase;
 import com.pharmacy.customer.domain.entity.Customer;
+import com.pharmacy.neighborhood.domain.entity.Neighborhood;
 import com.pharmacy.customer.domain.service.CustomerService;
 import com.pharmacy.customer.infraestructure.CustomerRepository;
+import com.pharmacy.neighborhood.aplication.FindNeighborhoodByIDUseCase;
+import com.pharmacy.neighborhood.domain.service.NeighborhoodService;
+import com.pharmacy.neighborhood.infraestructure.NeighborhoodRepository;
+import com.pharmacy.typeid.aplication.FindTypeByIDUseCase;
+import com.pharmacy.typeid.domain.entity.TypeID;
+import com.pharmacy.typeid.domain.service.TypeIDService;
+import com.pharmacy.typeid.infraestructure.TypeIDRepository;
 
 public class FindUI extends JFrame implements ActionListener {
+
+    TypeIDService typeIDService = new TypeIDRepository();
+    FindTypeByIDUseCase findTypeByIDUseCase = new FindTypeByIDUseCase(typeIDService);
+
+    CityService cityService = new CityRepository();
+    FindCityByIdUseCase findCityByIdUseCase = new FindCityByIdUseCase(cityService);
+
+    NeighborhoodService neighborhoodService = new NeighborhoodRepository();
+    FindNeighborhoodByIDUseCase findNeighborhoodByIDUseCase = new FindNeighborhoodByIDUseCase(neighborhoodService);
 
     private JLabel logoImg, title, labelID, labelTypeID, TypeID, labelName, Name, labelLastName, LastName, labelAge,
             Age, labelBirthDate, BirthDate, labelRegistration, Registration, labelCity, City, labelNeighborhood, Neighborhood;
@@ -179,6 +201,14 @@ public class FindUI extends JFrame implements ActionListener {
         add(backButton);
     }
 
+    public void startFindCustomer() {
+        FindUI findUI = new FindUI();
+        findUI.setBounds(0, 0, 500, 600);
+        findUI.setVisible(true);
+        findUI.setResizable(false);
+        findUI.setLocationRelativeTo(null);
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==FindButton){
@@ -189,19 +219,23 @@ public class FindUI extends JFrame implements ActionListener {
             if (customer.isPresent()) {
                 Customer foundCustomer = customer.get();
 
-                String TypeIdBox = Integer.toString(foundCustomer.getTypeID());
-                TypeID.setText(TypeIdBox);
+                int TypeIdBox = foundCustomer.getTypeID();
+                Optional<TypeID> foundType = findTypeByIDUseCase.findTypeById(TypeIdBox);
+                TypeID.setText(foundType.get().getType());
+
                 Name.setText(foundCustomer.getName());
                 LastName.setText(foundCustomer.getLastName());
                 Age.setText(Integer.toString(foundCustomer.getAge()));
                 BirthDate.setText(foundCustomer.getBirthDate());
                 Registration.setText(foundCustomer.getRegistrationDate());
 
-                String citybox = Integer.toString(foundCustomer.getCityId());
-                City .setText(citybox);
+                int citybox = foundCustomer.getCityId();
+                Optional<City> foundCity = findCityByIdUseCase.findCityByID(citybox);
+                City.setText(foundCity.get().getName());
 
-                String neighborhoodBox = Integer.toString(foundCustomer.getNeighborhoodId());
-                Neighborhood.setText(neighborhoodBox);
+                int neighborhoodBox = foundCustomer.getNeighborhoodId();
+                Optional<Neighborhood> foundNeighborhood = findNeighborhoodByIDUseCase.findNeighborhoodByID(neighborhoodBox);
+                Neighborhood.setText(foundNeighborhood.get().getName());
 
                 ID.setEditable(false);
 
