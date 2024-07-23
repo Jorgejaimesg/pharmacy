@@ -1,4 +1,5 @@
 package com.pharmacy.customer.infraestructure.customerui;
+
 import com.pharmacy.city.aplication.FindAllCityUseCase;
 import com.pharmacy.city.aplication.FindCityByNameUseCase;
 import com.pharmacy.city.domain.entity.City;
@@ -51,13 +52,16 @@ public class AddUI extends JFrame implements ActionListener {
     List<City> cities = findAllCityUseCase.findAllCity();
 
     NeighborhoodService neighborhoodService = new NeighborhoodRepository();
-    FindNeighborhoodByCityUseCase findNeighborhoodByCityUseCase = new FindNeighborhoodByCityUseCase(neighborhoodService);
-    FindNeighborhoodByNameUseCase findNeighborhoodByNameUseCase = new FindNeighborhoodByNameUseCase(neighborhoodService);
+    FindNeighborhoodByCityUseCase findNeighborhoodByCityUseCase = new FindNeighborhoodByCityUseCase(
+            neighborhoodService);
+    FindNeighborhoodByNameUseCase findNeighborhoodByNameUseCase = new FindNeighborhoodByNameUseCase(
+            neighborhoodService);
 
-    private JLabel logoImg,title,labelID, labelTypeID, labelName,labelLastName,labelAge,labelBirthDate,labelCity,labelNeighborhood;
-    private JTextField txtID, txtName,txtLastName,txtAge;
+    private JLabel logoImg, title, labelID, labelTypeID, labelName, labelLastName, labelAge, labelBirthDate, labelCity,
+            labelNeighborhood;
+    private JTextField txtID, txtName, txtLastName, txtAge;
     private JDateChooser birthDate;
-    private JComboBox<String> comboTypeID, comboCity,comboNeighborhood;
+    private JComboBox<String> comboTypeID, comboCity, comboNeighborhood;
     private JButton addButton, backButton, newButton;
     private int cityID;
 
@@ -81,8 +85,8 @@ public class AddUI extends JFrame implements ActionListener {
         title.setFont(new Font("Andale Mono", Font.BOLD, 40));
         title.setForeground(new Color(0, 0, 100));
         add(title);
-        
-        labelID = new JLabel("Customer ID : " );
+
+        labelID = new JLabel("Customer ID : ");
         labelID.setBounds(35, 130, 150, 30);
         labelID.setFont(new Font("Andale Mono", Font.PLAIN, 20));
         labelID.setForeground(new Color(0, 0, 100));
@@ -94,7 +98,7 @@ public class AddUI extends JFrame implements ActionListener {
         txtID.setForeground(new Color(0, 0, 100));
         add(txtID);
 
-        labelTypeID = new JLabel("Type ID : " );
+        labelTypeID = new JLabel("Type ID : ");
         labelTypeID.setBounds(35, 170, 100, 30);
         labelTypeID.setFont(new Font("Andale Mono", Font.PLAIN, 20));
         labelTypeID.setForeground(new Color(0, 0, 100));
@@ -106,12 +110,12 @@ public class AddUI extends JFrame implements ActionListener {
         comboTypeID.setForeground(new Color(0, 0, 100));
         add(comboTypeID);
         comboTypeID.addItem("");
-        for(TypeID type : types){
+        for (TypeID type : types) {
             comboTypeID.addItem(type.getType());
-        };
+        }
+        ;
 
-
-        labelName = new JLabel("Name : " );
+        labelName = new JLabel("Name : ");
         labelName.setBounds(35, 210, 100, 30);
         labelName.setFont(new Font("Andale Mono", Font.PLAIN, 20));
         labelName.setForeground(new Color(0, 0, 100));
@@ -123,7 +127,7 @@ public class AddUI extends JFrame implements ActionListener {
         txtName.setForeground(new Color(0, 0, 100));
         add(txtName);
 
-        labelLastName = new JLabel("Last name : " );
+        labelLastName = new JLabel("Last name : ");
         labelLastName.setBounds(35, 250, 200, 30);
         labelLastName.setFont(new Font("Andale Mono", Font.PLAIN, 20));
         labelLastName.setForeground(new Color(0, 0, 100));
@@ -135,31 +139,32 @@ public class AddUI extends JFrame implements ActionListener {
         txtLastName.setForeground(new Color(0, 0, 100));
         add(txtLastName);
 
-        labelAge = new JLabel("Age : " );
+        labelAge = new JLabel("Age : ");
         labelAge.setBounds(35, 290, 100, 30);
         labelAge.setFont(new Font("Andale Mono", Font.PLAIN, 20));
         labelAge.setForeground(new Color(0, 0, 100));
         add(labelAge);
-        
+
         txtAge = new JTextField();
         txtAge.setBounds(125, 290, 300, 30);
         txtAge.setFont(new Font("Andale Mono", Font.PLAIN, 20));
         txtAge.setForeground(new Color(0, 0, 100));
+        txtAge.setEditable(false);
         add(txtAge);
 
-        labelBirthDate = new JLabel("BirthDate : " );
+        labelBirthDate = new JLabel("BirthDate : ");
         labelBirthDate.setBounds(35, 330, 150, 30);
         labelBirthDate.setFont(new Font("Andale Mono", Font.PLAIN, 20));
         labelBirthDate.setForeground(new Color(0, 0, 100));
         add(labelBirthDate);
-    
-        birthDate = new JDateChooser ();
+
+        birthDate = new JDateChooser();
         birthDate.setBounds(155, 330, 270, 30);
         birthDate.setFont(new Font("Andale Mono", Font.PLAIN, 20));
         birthDate.setForeground(new Color(0, 0, 100));
         add(birthDate);
 
-        labelCity = new JLabel("City : " );
+        labelCity = new JLabel("City : ");
         labelCity.setBounds(35, 370, 150, 30);
         labelCity.setFont(new Font("Andale Mono", Font.PLAIN, 20));
         labelCity.setForeground(new Color(0, 0, 100));
@@ -171,12 +176,12 @@ public class AddUI extends JFrame implements ActionListener {
         comboCity.setForeground(new Color(0, 0, 100));
         add(comboCity);
         comboCity.addItem("");
-        for(City city : cities){
+        for (City city : cities) {
             comboCity.addItem(city.getName());
-        };
+        }
+        ;
 
-        
-        labelNeighborhood = new JLabel("Neighborhood : " );
+        labelNeighborhood = new JLabel("Neighborhood : ");
         labelNeighborhood.setBounds(35, 410, 150, 30);
         labelNeighborhood.setFont(new Font("Andale Mono", Font.PLAIN, 20));
         labelNeighborhood.setForeground(new Color(0, 0, 100));
@@ -216,6 +221,7 @@ public class AddUI extends JFrame implements ActionListener {
         add(newButton);
 
     }
+
     public void startAddCustomer() {
         AddUI addui = new AddUI();
         addui.setBounds(0, 0, 500, 580);
@@ -224,15 +230,17 @@ public class AddUI extends JFrame implements ActionListener {
         addui.setLocationRelativeTo(null);
     }
 
-        private void actualizarNeighborhood() {
-            comboNeighborhood.removeAllItems(); 
+    private void actualizarNeighborhood() {
+        comboNeighborhood.removeAllItems();
         String cityName = comboCity.getSelectedItem().toString();
         Optional<City> cityFound = findCityByNameUseCase.findCityByName(cityName);
-        this.cityID =cityFound.get().getId();
+        this.cityID = cityFound.get().getId();
         List<Neighborhood> neighborhoods = findNeighborhoodByCityUseCase.findAllNeighborhoodByCity(cityID);
-        for(Neighborhood neighborhooditem : neighborhoods){
+        
+        for (Neighborhood neighborhooditem : neighborhoods) {
             comboNeighborhood.addItem(neighborhooditem.getName());
-        };
+        }
+        ;
     }
 
     @Override
@@ -249,14 +257,16 @@ public class AddUI extends JFrame implements ActionListener {
 
                 newCustomer.setName(txtName.getText());
                 newCustomer.setLastName(txtLastName.getText());
-                newCustomer.setAge(Integer.parseInt(txtAge.getText()));
+                // newCustomer.setAge(Integer.parseInt(txtAge.getText()));
                 DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                
                 newCustomer.setBirthDate(dateFormat.format(birthDate.getDate()));
                 newCustomer.setRegistrationDate(dateFormat.format(new Date()));
                 newCustomer.setCityId(cityID);
 
                 String neighborhoodTxt = comboNeighborhood.getSelectedItem().toString();
-                Optional<Neighborhood> foundNeighborhood = findNeighborhoodByNameUseCase.execute(cityID, neighborhoodTxt);
+                Optional<Neighborhood> foundNeighborhood = findNeighborhoodByNameUseCase.execute(cityID,
+                        neighborhoodTxt);
                 newCustomer.setNeighborhoodId(foundNeighborhood.get().getId());
 
                 System.out.println(newCustomer);
@@ -264,13 +274,14 @@ public class AddUI extends JFrame implements ActionListener {
                 CustomerService customerService = new CustomerRepository();
                 CreateCustomerUseCase createCustomerUseCase = new CreateCustomerUseCase(customerService);
                 createCustomerUseCase.execute(newCustomer);
-                JOptionPane.showMessageDialog(this, "Customer added successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
-                //Limpiar las casillas
+                JOptionPane.showMessageDialog(this, "Customer added successfully.", "Success",
+                        JOptionPane.INFORMATION_MESSAGE);
+                // Limpiar las casillas
                 txtID.setText("");
                 comboTypeID.setSelectedItem("");
                 txtName.setText("");
                 txtLastName.setText("");
-                txtAge.setText("");
+                // txtAge.setText("");
                 birthDate.setDate(null);
                 comboCity.setSelectedItem("");
                 comboNeighborhood.setSelectedItem("");
@@ -279,21 +290,21 @@ public class AddUI extends JFrame implements ActionListener {
             }
         }
 
-        if(e.getSource()==backButton){
+        if (e.getSource() == backButton) {
             this.setVisible(false);
             CustomerUI uiCustomer = new CustomerUI();
             uiCustomer.startCustomer();
         }
 
-        if (e.getSource()==newButton){
+        if (e.getSource() == newButton) {
             txtID.setText("");
-                comboTypeID.setSelectedItem("");
-                txtName.setText("");
-                txtLastName.setText("");
-                txtAge.setText("");
-                birthDate.setDate(null);
-                comboCity.setSelectedItem("");
-                comboNeighborhood.setSelectedItem("");
+            comboTypeID.setSelectedItem("");
+            txtName.setText("");
+            txtLastName.setText("");
+            txtAge.setText("");
+            birthDate.setDate(null);
+            comboCity.setSelectedItem("");
+            comboNeighborhood.setSelectedItem("");
         }
     }
 

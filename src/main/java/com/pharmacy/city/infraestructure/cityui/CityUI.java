@@ -16,12 +16,11 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import com.pharmacy.Main;
 import com.pharmacy.city.aplication.FindAllCityUseCase;
 import com.pharmacy.city.domain.entity.City;
 import com.pharmacy.city.domain.service.CityService;
 import com.pharmacy.city.infraestructure.CityRepository;
-import com.pharmacy.main.infraestructure.MainUI;
-
 
 
 public class CityUI extends JFrame implements ActionListener{
@@ -119,8 +118,8 @@ public class CityUI extends JFrame implements ActionListener{
 
         if(e.getSource()==backButton){
             this.setVisible(false);
-            MainUI mainUI = new MainUI();
-            mainUI.startMenu();
+            Main main = new Main();
+            main.startMenu();
         }
 
         }

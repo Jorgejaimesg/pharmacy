@@ -24,7 +24,6 @@ CREATE TABLE Customer (
     TypeID INT,
     Name VARCHAR(30),
     LastName VARCHAR(10),
-    Age INT,
     BirthDate DATE,
     RegistrationDate DATE DEFAULT (CURDATE()),
     CityID INT,
@@ -33,3 +32,10 @@ CREATE TABLE Customer (
     FOREIGN KEY (NeighborhoodID) REFERENCES Neighborhood(ID),
     FOREIGN KEY (TypeID) REFERENCES TypeID(ID)
 );
+
+CREATE VIEW CustomerView AS
+SELECT 
+    ID, TypeID, Name, LastName, BirthDate, RegistrationDate, CityID, NeighborhoodID,
+    TIMESTAMPDIFF(YEAR, BirthDate, CURDATE()) AS Age
+FROM 
+    Customer;

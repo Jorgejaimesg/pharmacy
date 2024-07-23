@@ -9,11 +9,11 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import com.pharmacy.Main;
 import com.pharmacy.customer.aplication.FindAllCustomersUseCase;
 import com.pharmacy.customer.domain.entity.Customer;
 import com.pharmacy.customer.domain.service.CustomerService;
 import com.pharmacy.customer.infraestructure.CustomerRepository;
-import com.pharmacy.main.infraestructure.MainUI;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -148,8 +148,8 @@ public class CustomerUI extends JFrame implements ActionListener {
 
         if(e.getSource()==backButton){
             this.setVisible(false);
-            MainUI mainUI = new MainUI();
-            mainUI.startMenu();
+            Main main = new Main();
+            main.startMenu();
         }
     }
 }

@@ -16,7 +16,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import com.pharmacy.main.infraestructure.MainUI;
+import com.pharmacy.Main;
 import com.pharmacy.neighborhood.aplication.FindAllNeighborhoodUseCase;
 import com.pharmacy.neighborhood.domain.entity.NeighborhoodShow;
 import com.pharmacy.neighborhood.domain.service.NeighborhoodService;
@@ -120,8 +120,8 @@ public class NeighborhoodUI extends JFrame implements ActionListener{
 
         if(e.getSource()==backButton){
             this.setVisible(false);
-            MainUI mainUI = new MainUI();
-            mainUI.startMenu();
+            Main main = new Main();
+            main.startMenu();
         }
 
         }
